@@ -70,8 +70,8 @@ A modern, AI-powered image editing application built with Angular, featuring a c
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd <repository-name>
+   git clone git@github.com:connie-eb/creaition-image-editor.git
+   cd creaition-image-editor
    ```
 
 2. **Install dependencies**

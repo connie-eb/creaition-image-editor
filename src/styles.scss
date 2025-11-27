@@ -1,1 +1,140 @@
-/* You can add global styles to this file, and also import other style files */
+/* 导入字体 */
+@font-face {
+  font-family: 'strokeWeight';
+  src: url('/assets/fonts/strokeWeight.woff2') format('woff2-variations');
+  font-weight: 60 120;
+  font-style: oblique 0deg 12deg;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eina03-Regular';
+  src: url('/assets/fonts/Eina03-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Creaition 设计系统变量 */
+:root {
+  /* 颜色系统 */
+  --primary-grey: #efefee;
+  --secondary-grey: #bebebe;
+  --background: #f0f0f0;
+  --white: #ffffff;
+  --black: #000000;
+  --text-color: #000000;
+
+  /* 边框半径 */
+  --border-radius-button: 50px;
+  --border-radius-input: 0px;
+  --border-radius-card: 1rem;
+
+  /* 尺寸 */
+  --button-height: 35px;
+  --input-height: 50px;
+
+  /* 断点 */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'strokeWeight', 'Eina03-Regular', sans-serif;
+  background-color: var(--background);
+  color: var(--text-color);
+  font-variation-settings: 'wght' 60, 'slnt' 0;
+  line-height: 1.5;
+}
+
+/* Creaition 按钮样式 */
+.creaition-button {
+  min-height: var(--button-height);
+  border-radius: var(--border-radius-button);
+  border: none;
+  background: var(--black);
+  color: var(--white);
+  font-family: inherit;
+  font-variation-settings: 'wght' 60, 'slnt' 0;
+  cursor: pointer;
+  padding: 0 1.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    font-variation-settings: 'wght' 80, 'slnt' 12;
+    background: var(--text-color);
+  }
+
+  &:disabled {
+    background: var(--secondary-grey);
+    cursor: not-allowed;
+  }
+
+  &.secondary {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--secondary-grey);
+  }
+}
+
+/* Creaition 输入框样式 */
+.creaition-input {
+  height: var(--input-height);
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--secondary-grey);
+  background: var(--white);
+  font-family: inherit;
+  font-variation-settings: 'wght' 60, 'slnt' 0;
+  padding: 0 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--black);
+  }
+}
+
+/* 响应式工具类 */
+.responsive-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @media (min-width: 640px) {
+    max-width: var(--breakpoint-sm);
+  }
+
+  @media (min-width: 768px) {
+    max-width: var(--breakpoint-md);
+  }
+
+  @media (min-width: 1024px) {
+    max-width: var(--breakpoint-lg);
+  }
+
+  @media (min-width: 1280px) {
+    max-width: var(--breakpoint-xl);
+  }
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+
+  .mobile-full {
+    width: 100% !important;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

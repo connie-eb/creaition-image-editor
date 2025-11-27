@@ -1,0 +1,180 @@
+<div class="ai-panel">
+  <!-- 面板头部 -->
+  <div class="panel-header">
+    <h3>AI Image Generation</h3>
+    <button class="close-button" (click)="closePanel()">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+
+  <div class="panel-content">
+    <!-- 生成表单 -->
+    <form [formGroup]="aiForm" class="generation-form">
+      <!-- 提示词输入 -->
+      <div class="form-group">
+        <label for="prompt">Prompt</label>
+        <textarea
+          id="prompt"
+          formControlName="prompt"
+          class="creaition-input"
+          placeholder="Describe the image you want to generate..."
+          rows="3">
+        </textarea>
+
+        <!-- 提示词建议 -->
+        <div class="suggestions">
+          <span class="suggestions-label">Quick suggestions:</span>
+          <div class="suggestion-chips">
+            <button
+              *ngFor="let suggestion of promptSuggestions"
+              type="button"
+              class="suggestion-chip"
+              (click)="onUseSuggestion(suggestion)">
+              {{ suggestion }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 模型选择 -->
+      <div class="form-group">
+        <label for="model">AI Model</label>
+        <select id="model" formControlName="model" class="creaition-input">
+          <option *ngFor="let model of models" [value]="model.id">
+            {{ model.name }} - {{ model.description }}
+          </option>
+        </select>
+      </div>
+
+      <!-- 尺寸设置 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="width">Width</label>
+          <input
+            type="number"
+            id="width"
+            formControlName="width"
+            class="creaition-input"
+            min="64"
+            max="1024">
+        </div>
+
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input
+            type="number"
+            id="height"
+            formControlName="height"
+            class="creaition-input"
+            min="64"
+            max="1024">
+        </div>
+      </div>
+
+      <!-- 高级选项切换 -->
+      <div class="advanced-toggle">
+        <button type="button" class="toggle-button" (click)="showAdvanced = !showAdvanced">
+          <span class="material-icons">{{ showAdvanced ? 'expand_less' : 'expand_more' }}</span>
+          Advanced Options
+        </button>
+      </div>
+
+      <!-- 高级选项 -->
+      <div *ngIf="showAdvanced" class="advanced-options">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="steps">Steps: {{ aiForm.get('steps')?.value }}</label>
+            <input
+              type="range"
+              id="steps"
+              formControlName="steps"
+              class="creaition-range"
+              min="1"
+              max="50">
+          </div>
+
+          <div class="form-group">
+            <label for="guidanceScale">Guidance Scale: {{ aiForm.get('guidanceScale')?.value }}</label>
+            <input
+              type="range"
+              id="guidanceScale"
+              formControlName="guidanceScale"
+              class="creaition-range"
+              min="1"
+              max="20"
+              step="0.5">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="seed">Seed (optional)</label>
+          <input
+            type="number"
+            id="seed"
+            formControlName="seed"
+            class="creaition-input"
+            placeholder="Random">
+        </div>
+      </div>
+
+      <!-- 生成按钮 -->
+      <button
+        type="button"
+        class="generate-button creaition-button"
+        [disabled]="!canGenerate"
+        (click)="onGenerate()">
+        <span *ngIf="!isGenerating" class="material-icons">auto_awesome</span>
+        <span *ngIf="isGenerating" class="material-icons spin">refresh</span>
+        {{ isGenerating ? 'Generating...' : 'Generate Image' }}
+      </button>
+    </form>
+
+    <!-- 进度指示器 -->
+    <div *ngIf="isGenerating" class="progress-section">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progress"></div>
+      </div>
+      <span class="progress-text">{{ progress }}%</span>
+    </div>
+
+    <!-- 错误显示 -->
+    <div *ngIf="error" class="error-section">
+      <div class="error-message">
+        <span class="material-icons">error</span>
+        {{ error }}
+      </div>
+      <button class="retry-button creaition-button secondary" (click)="onRetry()">
+        Retry
+      </button>
+    </div>
+
+    <!-- 生成历史 -->
+    <div class="history-section" *ngIf="generationHistory.length > 0">
+      <h4>Generation History</h4>
+      <div class="history-grid">
+        <div *ngFor="let item of generationHistory" class="history-item">
+          <img [src]="'data:image/png;base64,' + item.image"
+               [alt]="item.prompt"
+               (click)="onUseHistoryImage(item.image)"
+               class="history-image">
+
+          <div class="history-info">
+            <p class="history-prompt">{{ item.prompt | truncate:50 }}</p>
+            <div class="history-actions">
+              <button class="action-button"
+                      (click)="onToggleFavorite(item)"
+                      [class.favorited]="item.favorite">
+                <span class="material-icons">
+                  {{ item.favorite ? 'favorite' : 'favorite_border' }}
+                </span>
+              </button>
+              <button class="action-button" (click)="onDeleteHistory(item)">
+                <span class="material-icons">delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

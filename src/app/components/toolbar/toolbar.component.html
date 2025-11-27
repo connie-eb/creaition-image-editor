@@ -1,0 +1,55 @@
+<div class="toolbar">
+  <!-- 主工具栏 -->
+  <div class="main-tools">
+    <!-- 类别选择 -->
+    <div class="category-selector">
+      <button
+        *ngFor="let category of categories"
+        class="category-button"
+        [class.active]="activeCategory === category.id"
+        (click)="selectCategory(category.id)">
+        <span class="material-icons">{{ category.icon }}</span>
+        <span class="category-name">{{ category.name }}</span>
+      </button>
+      <!-- 工具选择 -->
+      <button
+        *ngFor="let tool of getCategoryTools()"
+        class="tool-button creaition-button"
+        [class.active]="activeTool === tool.id"
+        [class.secondary]="activeTool !== tool.id"
+        (click)="selectTool(tool.id)">
+        <span class="material-icons">{{ tool.icon }}</span>
+        <span class="tool-name">{{ tool.name }}</span>
+      </button>
+      <!-- 属性面板切换 -->
+      <button class="properties-toggle creaition-button secondary" (click)="toggleProperties()">
+        <span class="material-icons">tune</span>
+        <span class="button-text">Properties</span>
+      </button>
+    </div>
+
+<!--    &lt;!&ndash; 工具选择 &ndash;&gt;-->
+<!--    <div class="tool-selector">-->
+<!--      <button-->
+<!--        *ngFor="let tool of getCategoryTools()"-->
+<!--        class="tool-button creaition-button"-->
+<!--        [class.active]="activeTool === tool.id"-->
+<!--        [class.secondary]="activeTool !== tool.id"-->
+<!--        (click)="selectTool(tool.id)">-->
+<!--        <span class="material-icons">{{ tool.icon }}</span>-->
+<!--        <span class="tool-name">{{ tool.name }}</span>-->
+<!--      </button>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; 属性面板切换 &ndash;&gt;-->
+<!--    <button class="properties-toggle creaition-button secondary" (click)="toggleProperties()">-->
+<!--      <span class="material-icons">tune</span>-->
+<!--      <span class="button-text">Properties</span>-->
+<!--    </button>-->
+  </div>
+
+  <!-- AI 生成面板 -->
+  <div *ngIf="showAIPanel" class="ai-panel">
+    <app-ai-panel (close)="closeAIPanel()"></app-ai-panel>
+  </div>
+</div>

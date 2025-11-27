@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, ImageEditorComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'image-editor';
+  title = 'Creaition Image Editor';
+
+  onImageGenerated(imageData: string): void {
+    console.log('AI generated image received:', imageData);
+  }
 }

@@ -1,0 +1,51 @@
+<div class="editor-container">
+  <!-- 顶部工具栏 -->
+  <app-toolbar
+    [isMobile]="isMobile"
+    (toolSelected)="onToolSelected($event)"
+    (propertiesToggled)="togglePropertiesPanel()">
+  </app-toolbar>
+
+  <div class="editor-content">
+    <!-- 主编辑区域 -->
+    <div class="canvas-container" [class.full-width]="!showPropertiesPanel || isMobile">
+      <div class="canvas-wrapper">
+        <canvas #canvas 
+                class="drawing-canvas"
+                [style.filter]="getFilterStyle()"></canvas>
+        <!-- 文本输入框 -->
+        <input *ngIf="textInputActive"
+               #textInput
+               type="text"
+               class="text-input"
+               [style.left.px]="textInputX"
+               [style.top.px]="textInputY"
+               [style.font-size.px]="getTextFontSize()"
+               [style.color]="getTextColor()"
+               [style.font-weight]="getTextFontWeight()"
+               [style.font-style]="getTextFontStyle()"
+               [style.font-family]="'strokeWeight, Arial, sans-serif'"
+               (blur)="finishTextInput()"
+               (keydown.enter)="finishTextInput()"
+               (keydown.escape)="cancelTextInput()"
+               autofocus>
+      </div>
+    </div>
+
+    <!-- 属性面板 -->
+    <app-properties-panel
+      *ngIf="showPropertiesPanel"
+      [class.mobile-modal]="isMobile"
+      [class.hidden]="!showPropertiesPanel && !isMobile"
+      [state]="state$ | async"
+      (close)="showPropertiesPanel = false"
+      (propertyChange)="onPropertyChange($event.property, $event.value)">
+    </app-properties-panel>
+
+    <!-- 移动端属性面板遮罩 -->
+    <div *ngIf="isMobile && showPropertiesPanel"
+         class="properties-overlay"
+         (click)="showPropertiesPanel = false">
+    </div>
+  </div>
+</div>

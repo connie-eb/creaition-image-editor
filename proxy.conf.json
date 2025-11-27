@@ -1,0 +1,13 @@
+{
+  "/api/huggingface": {
+    "target": "https://api-inference.huggingface.co",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/huggingface": ""
+    },
+    "headers": {
+      "Authorization": "Bearer hf_your_actual_token_here"
+    }
+  }
+}

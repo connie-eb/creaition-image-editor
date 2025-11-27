@@ -1,0 +1,91 @@
+@use '@angular/material' as mat;
+
+// Creaition 设计系统调色板
+$creaition-primary: (
+  50: #f0f0f0,
+  100: #efefee,
+  200: #bebebe,
+  300: #8d8d8d,
+  400: #5c5c5c,
+  500: #000000,
+  600: #000000,
+  700: #000000,
+  800: #000000,
+  900: #000000,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+  )
+);
+
+$creaition-accent: (
+  50: #ffffff,
+  100: #ffffff,
+  200: #ffffff,
+  300: #ffffff,
+  400: #ffffff,
+  500: #ffffff,
+  600: #f5f5f5,
+  700: #ebebeb,
+  800: #e0e0e0,
+  900: #d6d6d6,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+  )
+);
+
+// 创建主题
+$creaition-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette($creaition-primary),
+    accent: mat.define-palette($creaition-accent),
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'strokeWeight, Eina03-Regular, sans-serif',
+  ),
+  density: 0,
+));
+
+// 应用主题
+@include mat.all-component-themes($creaition-theme);
+
+// 自定义组件样式
+.mat-mdc-button {
+  border-radius: 50px !important;
+  min-height: 35px !important;
+
+  &.mat-primary {
+    font-variation-settings: 'wght' 60, 'slnt' 0;
+
+    &:hover {
+      font-variation-settings: 'wght' 80, 'slnt' 12;
+    }
+  }
+}
+
+.mat-mdc-form-field {
+  .mdc-text-field {
+    border-radius: 0px !important;
+  }
+}
+
+.mat-mdc-card {
+  border-radius: 1rem !important;
+}

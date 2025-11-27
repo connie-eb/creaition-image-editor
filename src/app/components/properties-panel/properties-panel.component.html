@@ -1,0 +1,161 @@
+<div class="properties-panel" [class.mobile]="isMobile">
+  <!-- 面板头部 -->
+  <div class="panel-header">
+    <h3>Properties</h3>
+    <button *ngIf="isMobile" class="close-button" (click)="closePanel()">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+
+  <div class="panel-content">
+    <!-- 画笔属性 -->
+    <div class="property-group">
+      <h4 class="property-title">Brush</h4>
+
+      <div class="property-item">
+        <label>Color</label>
+        <input type="color"
+               [value]="brushColor"
+               (change)="onColorChange($event, 'brushColor')"
+               class="creaition-input">
+      </div>
+
+      <div class="property-item">
+        <label>Width: {{ brushWidth }}px</label>
+        <input type="range"
+               min="1"
+               max="50"
+               [value]="brushWidth"
+               (change)="onRangeChange($event, 'brushWidth')"
+               class="creaition-range">
+      </div>
+
+      <div class="property-item">
+        <label>Opacity: {{ brushOpacity }}%</label>
+        <input type="range"
+               min="1"
+               max="100"
+               [value]="brushOpacity"
+               (change)="onRangeChange($event, 'brushOpacity')"
+               class="creaition-range">
+      </div>
+    </div>
+
+    <!-- 形状属性 -->
+    <div class="property-group">
+      <h4 class="property-title">Shape</h4>
+
+      <div class="property-item">
+        <label>Fill Color</label>
+        <input type="color"
+               [value]="shapeFillColor"
+               (change)="onColorChange($event, 'shapeFillColor')"
+               class="creaition-input">
+      </div>
+
+      <div class="property-item">
+        <label>Stroke Color</label>
+        <input type="color"
+               [value]="shapeStrokeColor"
+               (change)="onColorChange($event, 'shapeStrokeColor')"
+               class="creaition-input">
+      </div>
+
+      <div class="property-item">
+        <label>Stroke Width: {{ shapeStrokeWidth }}px</label>
+        <input type="range"
+               min="1"
+               max="10"
+               [value]="shapeStrokeWidth"
+               (change)="onRangeChange($event, 'shapeStrokeWidth')"
+               class="creaition-range">
+      </div>
+    </div>
+
+    <!-- 文本属性 -->
+    <div class="property-group">
+      <h4 class="property-title">Text</h4>
+
+      <div class="property-item">
+        <label>Color</label>
+        <input type="color"
+               [value]="textColor"
+               (change)="onColorChange($event, 'textColor')"
+               class="creaition-input">
+      </div>
+
+      <div class="property-item">
+        <label>Size: {{ fontSize }}px</label>
+        <input type="range"
+               min="8"
+               max="72"
+               [value]="fontSize"
+               (change)="onRangeChange($event, 'fontSize')"
+               class="creaition-range">
+      </div>
+
+      <div class="property-item">
+        <label>Font Weight</label>
+        <div class="weight-selector">
+          <button *ngFor="let weight of [60, 80, 120]"
+                  class="weight-button"
+                  [class.active]="fontWeight === weight"
+                  (click)="onFontWeightChange(weight)">
+            {{ weight }}
+          </button>
+        </div>
+      </div>
+
+      <div class="property-item">
+        <label>Font Slant</label>
+        <div class="slant-selector">
+          <button class="slant-button"
+                  [class.active]="fontSlant === 0"
+                  (click)="onFontSlantChange(0)">
+            Normal
+          </button>
+          <button class="slant-button"
+                  [class.active]="fontSlant === 12"
+                  (click)="onFontSlantChange(12)">
+            Italic
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 滤镜属性 -->
+    <div class="property-group">
+      <h4 class="property-title">Filters</h4>
+
+      <div class="property-item">
+        <label>Brightness: {{ brightness }}%</label>
+        <input type="range"
+               min="0"
+               max="200"
+               [value]="brightness"
+               (change)="onRangeChange($event, 'brightness')"
+               class="creaition-range">
+      </div>
+
+      <div class="property-item">
+        <label>Contrast: {{ contrast }}%</label>
+        <input type="range"
+               min="0"
+               max="200"
+               [value]="contrast"
+               (change)="onRangeChange($event, 'contrast')"
+               class="creaition-range">
+      </div>
+
+      <div class="property-item">
+        <label>Saturation: {{ saturation }}%</label>
+        <input type="range"
+               min="0"
+               max="200"
+               [value]="saturation"
+               (change)="onRangeChange($event, 'saturation')"
+               class="creaition-range">
+      </div>
+    </div>
+  </div>
+</div>

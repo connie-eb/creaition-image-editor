@@ -29,7 +29,7 @@
     flex: 1;
     position: relative;
     width: 100%;
-    height: 600px; // Web端固定高度
+    height: 450px; // Web端固定高度
     padding: 2rem 4rem;
     box-sizing: border-box;
   }
@@ -86,7 +86,8 @@
 
   .canvas-container {
     .canvas-wrapper {
-      height: 400px; // Mobile端固定高度
+      height: 300px; // Mobile端固定高度
+      padding: 1rem 2rem;
     }
   }
 

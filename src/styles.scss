@@ -61,7 +61,7 @@ body {
   border: none;
   background: var(--black);
   color: var(--white);
-  font-family: inherit;
+  font-family: 'strokeWeight', 'Eina03-Regular', sans-serif;
   font-variation-settings: 'wght' 60, 'slnt' 0;
   cursor: pointer;
   padding: 0 1.5rem;
@@ -134,6 +134,24 @@ body {
   .mobile-full {
     width: 100% !important;
   }
+}
+
+/* Material Icons 样式 */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: normal;
 }
 
 html, body { height: 100%; }

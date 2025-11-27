@@ -196,7 +196,8 @@
     background: var(--white);
     border-radius: var(--border-radius-input);
     cursor: pointer;
-    font-family: inherit;
+    font-family: 'strokeWeight', 'Eina03-Regular', sans-serif;
+    font-variation-settings: 'wght' 60, 'slnt' 0;
     transition: all 0.2s ease;
 
     &:hover {
@@ -208,6 +209,7 @@
       background: var(--black);
       color: var(--white);
       border-color: var(--black);
+      font-variation-settings: 'wght' 80, 'slnt' 0;
     }
   }
 }

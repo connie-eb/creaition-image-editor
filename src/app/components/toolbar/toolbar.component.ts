@@ -37,7 +37,7 @@ export class ToolbarComponent {
 
   public categories = [
     { id: 'draw', name: 'Draw', icon: 'edit' },
-    { id: 'shape', name: 'Shapes', icon: 'shapes' },
+    { id: 'shape', name: 'Shapes', icon: 'crop_square' },
     { id: 'text', name: 'Text', icon: 'title' },
     { id: 'filter', name: 'Filters', icon: 'tune' },
     { id: 'ai', name: 'AI Tools', icon: 'smart_toy' }
